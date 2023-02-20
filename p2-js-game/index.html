@@ -11,8 +11,12 @@
     <script>
         let canvas;
         let canvasContext;
-        let ballX = 50
-        let ballSpeedX = 5;
+
+        let ballX = 50;
+        let ballY = 50;
+
+        let ballSpeedX = 10;
+        let ballSpeedY = 4;
         // this is my plan b for my game, if i can't execute my plan a
 
         window.onload = function()
@@ -33,6 +37,7 @@
         function move()
         {
             ballX += ballSpeedX; //bounce off the corners
+            ballY += ballSpeedY;
 	        if(ballX < 0)
             {
                 ballSpeedX = -ballSpeedX;// maintain speed after bouncing off the wall
@@ -41,28 +46,35 @@
             {
                 ballSpeedX = -ballSpeedX;
             }
+
+
+	        if(ballY < 0)
+            {
+                ballSpeedY = -ballSpeedY;// maintain speed after bouncing off vertically
+            }
+	        if(ballY > canvas.height)
+            {
+                ballSpeedY = -ballSpeedY;
+            }
         }
 
         function draw()
         {
 
-            canvasContext.fillStyle = 'black';
-            canvasContext.fillRect(0,0, canvas.width, canvas.height);// (posX. posY, height, width)
+            colorRect(0,0,canvas.width,canvas.height,'black');
 
-            canvasContext.fillStyle = 'white'; //pad
-            canvasContext.fillRect(0,210, 10, 200);
+            colorRect(0,210,10,100,'white');
 
-            
-            drawCircle(ballX, 150, 10, 'grey');
+            drawCircle(ballX, ballY, 10, 'grey');
 
             
         }
 
-        function drawCircle (x, y, radius, circleColor)
+        function drawCircle (x, y, radius, drawColor)
         {
-            canvasContext.fillStyle =  circleColor; //ball
+            canvasContext.fillStyle =  drawColor; //ball
             canvasContext.beginPath(); // hwo the call is being filled
-            canvasContext.arc(ballX, 100, 10, 0, Math.PI*2, true); // (posX. posY, radius, angles, circumference, clockewise or counter)
+            canvasContext.arc(x, y, 10, 0, Math.PI*2, true); // (posX. posY, radius, angles, circumference, clockewise or counter)
             canvasContext.fill(); 
 
         }

@@ -13,7 +13,7 @@
         let canvasContext;
         let ballX = 50
         let ballSpeedX = 5;
-        
+        // this is my plan b for my game, if i can't execute my plan a
 
         window.onload = function()
         {
@@ -24,18 +24,18 @@
             
             setInterval(function()
             {
-                moveEverything();
-                drawEverything();
+                move();
+                draw();
             }, 1000/framePerSecond);
 
         }
 
-        function moveEverything()
+        function move()
         {
-            ballX += ballSpeedX;
+            ballX += ballSpeedX; //bounce off the corners
 	        if(ballX < 0)
             {
-                ballSpeedX = -ballSpeedX;
+                ballSpeedX = -ballSpeedX;// maintain speed after bouncing off the wall
             }
 	        if(ballX > canvas.width)
             {
@@ -43,19 +43,28 @@
             }
         }
 
-        function drawEverything()
+        function draw()
         {
 
             canvasContext.fillStyle = 'black';
-            canvasContext.fillRect(0,0, canvas.width, canvas.height);
+            canvasContext.fillRect(0,0, canvas.width, canvas.height);// (posX. posY, height, width)
 
-            canvasContext.fillStyle = 'white';
+            canvasContext.fillStyle = 'white'; //pad
             canvasContext.fillRect(0,210, 10, 200);
 
-            canvasContext.fillStyle = 'red';
-            canvasContext.fillRect(ballX,100, 10, 10);
+            
+            drawCircle(ballX, 150, 10, 'grey');
 
             
+        }
+
+        function drawCircle (x, y, radius, circleColor)
+        {
+            canvasContext.fillStyle =  circleColor; //ball
+            canvasContext.beginPath(); // hwo the call is being filled
+            canvasContext.arc(ballX, 100, 10, 0, Math.PI*2, true); // (posX. posY, radius, angles, circumference, clockewise or counter)
+            canvasContext.fill(); 
+
         }
         
         function colorRect(leftX, topY, width, height, drawColor)

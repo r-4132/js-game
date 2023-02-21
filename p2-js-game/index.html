@@ -13,17 +13,21 @@
         let canvasContext;
 
         let ballX = 50;
-        let ballY = 50;
+        let ballY = 50; //size of the ball
 
-        let ballSpeedX = 10;
+        let ballSpeedX = 15;
         let ballSpeedY = 4;
 
         let paddleOneY = 250;
         let paddleTwoY = 250;
-        const PADDLE_HEIGHT = 100; //different style of naming to emphasize that it's const
-        const PADDLE_WIDTH = 20; //paddle thickness
+        const PADDLE_HEIGHT = 100; //different style of naming to emphasize that it's constant
+        const PADDLE_WIDTH = 15; //paddle thickness
 
-        // this is my plan b for my game, if i can't execute my plan a
+        let playerScore = 0;
+        let cpuScore = 0;
+
+        let winScore = 4;
+
 
         function calcMousePos(evt) // function that will execute everytime the mouse moves
         {
@@ -53,45 +57,83 @@
             canvas.addEventListener('mousemove', function(evt) // will make the paddle move 
             {
                 let mousePos = calcMousePos(evt); // function evt will pass calcMousePos and will get the y value and contain it in paddleOneY
-                paddleOneY = mousePos.y - (PADDLE_HEIGHT / 2); 
+                paddleOneY = mousePos.y - (PADDLE_HEIGHT/2); 
             });
 
         }
 
         function ballReset() // this will make the ball reset in the middle whenever a player scores
         {
+            if(cpuScore >= winScore || playerScore >= winScore )
+            {
+                cpuScore = 0;
+                playerScore = 0;
+            }
             ballSpeedX = -ballSpeedX;
             ballX = canvas.width/2
             ballY = canvas.height/2
         }
 
+        function cpuMove() //movement for cpu player
+        {
+            let paddleTwoYMid = paddleTwoY + (PADDLE_HEIGHT/2) // make the center part of the paddle the start point
+            if(paddleTwoYMid < ballY - 30) // the paddles stops moving if the direction of the ball is 30 pixels above the center
+            {
+                paddleTwoY +=6; 
+            }
+
+            else if(paddleTwoYMid > ballY + 30)
+            {
+                paddleTwoY -=6;
+            } 
+
+            
+        }
+
         function move()
         {
+            cpuMove();
             ballX += ballSpeedX; //makign the ball move
             ballY += ballSpeedY;
             
 	        if(ballX < 0) // collision detection for the paddle 
             {
-                if(ballY > paddleOneY && ballY < paddleOneY + PADDLE_HEIGHT)
+                if(ballY > paddleOneY && ballY < paddleOneY + PADDLE_HEIGHT) // if the ball hit the paddle for paddleOne(player/left paddle) 
                 {
-                    ballSpeedX = -ballSpeedX
+                    ballSpeedX = -ballSpeedX // bounce off the paddle 
+                    let deltaY = ballY -(paddleOneY + PADDLE_HEIGHT/2);// the speed of the ball will now depend on the angle and distance of the center of the paddle.
+                    ballSpeedY = deltaY * 0.35; 
                 }
-                else ballReset(); 
+                else  // else not, reset the ball in the middle and add score to cpu
+                {
+                    cpuScore ++;
+                    ballReset();
+                }
                 
             }
 
-	        if(ballX > canvas.width) // bounces off the x-axis
+	        if(ballX > canvas.width) // collision detection the paddleTwo(CPU/right paddle)
             {
-                ballSpeedX = -ballSpeedX;
+                if(ballY > paddleTwoY && ballY < paddleTwoY + PADDLE_HEIGHT)
+                {
+                    ballSpeedX = -ballSpeedX;
+                    let deltaY = ballY -(paddleTwoY + PADDLE_HEIGHT/2);
+                    ballSpeedY = deltaY * 0.35;
+                }
+                else 
+                {
+                    playerScore++;
+                    ballReset();
+                }
             }
 
 
-	        if(ballY < 0) //bounces off the y-axis
+	        if(ballY < 0) // maintain speed after bouncing off vertically
             {
-                ballSpeedY = -ballSpeedY;// maintain speed after bouncing off vertically
+                ballSpeedY = -ballSpeedY;
             }
 
-	        if(ballY > canvas.height) //bounces off 
+	        if(ballY > canvas.height) //bounces off  y-axis
             {
                 ballSpeedY = -ballSpeedY;
             }
@@ -99,16 +141,23 @@
 
         function draw()
         {
+            let scoreCpu = cpuScore.toString();
+            let scorePlayer = playerScore.toString();
 
             colorRect(0,0,canvas.width,canvas.height,'black');
-
-            colorRect(0,paddleOneY,PADDLE_WIDTH,100,'white'); // player 1(left)
-            colorRect(canvas.width - PADDLE_WIDTH,paddleTwoY,PADDLE_WIDTH,100,'white'); // computer (right)
-
             drawCircle(ballX, ballY, 10, 'grey');
+
+
+            colorRect(0,paddleOneY,PADDLE_WIDTH,PADDLE_HEIGHT,'white'); // player 1(left)
+            colorRect(canvas.width - PADDLE_WIDTH,paddleTwoY,PADDLE_WIDTH,PADDLE_HEIGHT,'white'); // computer (right)
+
+            canvasContext.fillText(scorePlayer, 100, 100);
+            canvasContext.fillText(scoreCpu, canvas.width - 100, 100);
 
             
         }
+
+        
 
         function drawCircle (x, y, radius, drawColor)
         {

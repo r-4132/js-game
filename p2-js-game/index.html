@@ -19,7 +19,9 @@
         let ballSpeedY = 4;
 
         let paddleOneY = 250;
+        let paddleTwoY = 250;
         const PADDLE_HEIGHT = 100; //different style of naming to emphasize that it's const
+        const PADDLE_WIDTH = 20; //paddle thickness
 
         // this is my plan b for my game, if i can't execute my plan a
 
@@ -51,30 +53,45 @@
             canvas.addEventListener('mousemove', function(evt) // will make the paddle move 
             {
                 let mousePos = calcMousePos(evt); // function evt will pass calcMousePos and will get the y value and contain it in paddleOneY
-                paddleOneY = mousePos.y; 
+                paddleOneY = mousePos.y - (PADDLE_HEIGHT / 2); 
             });
 
         }
 
+        function ballReset() // this will make the ball reset in the middle whenever a player scores
+        {
+            ballSpeedX = -ballSpeedX;
+            ballX = canvas.width/2
+            ballY = canvas.height/2
+        }
+
         function move()
         {
-            ballX += ballSpeedX; //bounce off the corners
+            ballX += ballSpeedX; //makign the ball move
             ballY += ballSpeedY;
-	        if(ballX < 0)
+            
+	        if(ballX < 0) // collision detection for the paddle 
             {
-                ballSpeedX = -ballSpeedX;// maintain speed after bouncing off the wall
+                if(ballY > paddleOneY && ballY < paddleOneY + PADDLE_HEIGHT)
+                {
+                    ballSpeedX = -ballSpeedX
+                }
+                else ballReset(); 
+                
             }
-	        if(ballX > canvas.width)
+
+	        if(ballX > canvas.width) // bounces off the x-axis
             {
                 ballSpeedX = -ballSpeedX;
             }
 
 
-	        if(ballY < 0)
+	        if(ballY < 0) //bounces off the y-axis
             {
                 ballSpeedY = -ballSpeedY;// maintain speed after bouncing off vertically
             }
-	        if(ballY > canvas.height)
+
+	        if(ballY > canvas.height) //bounces off 
             {
                 ballSpeedY = -ballSpeedY;
             }
@@ -85,7 +102,8 @@
 
             colorRect(0,0,canvas.width,canvas.height,'black');
 
-            colorRect(0,paddleOneY,10,100,'white'); // player 1(left)
+            colorRect(0,paddleOneY,PADDLE_WIDTH,100,'white'); // player 1(left)
+            colorRect(canvas.width - PADDLE_WIDTH,paddleTwoY,PADDLE_WIDTH,100,'white'); // computer (right)
 
             drawCircle(ballX, ballY, 10, 'grey');
 

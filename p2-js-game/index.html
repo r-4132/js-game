@@ -27,7 +27,11 @@
         let cpuScore = 0;
 
         let winScore = 3;
-        let winScreen = false; 
+        let winScreen = false;
+        
+        let startGameScreen = true;
+
+        let resetScreen = false
 
 
         function calcMousePos(evt) // function that will execute everytime the mouse moves
@@ -54,6 +58,28 @@
 
         }
 
+        function startGame(evt)
+        {
+            if(startGameScreen)
+            {
+                startGameScreen = false;
+            }
+
+        }
+
+        function resetGame(evt)
+        {
+            ballReset();
+            playerScore = 0;
+            cpuScore = 0;
+        }
+
+        function stopGame()
+        {
+            startGameScreen = true;
+
+        }
+
     
 
         window.onload = function()
@@ -62,15 +88,27 @@
             canvasContext = canvas.getContext('2d');
 
             let framePerSecond = 30;
-            
+            canvas.addEventListener('mousedown', mouseClick);
             setInterval(function() //for every second it will draw() the and move() it, but also make sure that it will bounce off the corners
             {
                 move();
                 draw();
             }, 1000/framePerSecond);
 
-            canvas.addEventListener('mousedown', mouseClick);
+            canvas.addEventListener('mousedown', startGame);
+            window.addEventListener('keydown', e => // this will restart the game
+            {
 
+
+                if(e.key === 'Escape')
+                {
+                    resetGame();
+                }
+                else if(e.key === ' ')
+                {
+                    stopGame();
+                }
+            })
 
             canvas.addEventListener('mousemove', function(evt) // will make the paddle move 
             {
@@ -82,6 +120,7 @@
 
         function ballReset() // this will make the ball reset in the middle whenever a player scores
         {
+            
             if(cpuScore >= winScore || playerScore >= winScore )
             {
                 // cpuScore = 0;
@@ -112,6 +151,8 @@
 
         function move()
         {
+           
+            
             if(winScreen)
             {
                 return;
@@ -168,7 +209,15 @@
             let scoreCpu = cpuScore.toString();
             let scorePlayer = playerScore.toString();
 
-            colorRect(0,0,canvas.width,canvas.height,'black');
+            colorRect(0,0,canvas.width,canvas.height,'black');   
+
+            if(startGameScreen)
+            {
+                    winScreen = true;
+
+            }
+
+
 
             if(winScreen)
             {canvasContext.fillStyle = 'white';
@@ -176,6 +225,7 @@
                 if(cpuScore >= winScore) 
                 {
 			        canvasContext.fillText("CPU Won", 350, 200);
+                    canvasContext.fillText('click to continue', 350, 500);
 
 
                 }
@@ -183,12 +233,17 @@
                 else if(playerScore >= winScore )
                 {
         			canvasContext.fillText("You Won", 350, 200);
+                    canvasContext.fillText('click to continue', 350, 500);
 
 
                 }
 
+                else if(playerScore == 0 && cpuScore == 0)
+                {
+        			canvasContext.fillText("Start Game", 350, 200);
+
+                }
                 
-                canvasContext.fillText('click to continue', 350, 500);
 
                 return;
             }
@@ -200,6 +255,8 @@
             colorRect(canvas.width - PADDLE_WIDTH,paddleTwoY,PADDLE_WIDTH,PADDLE_HEIGHT,'white'); // computer (right)
 
             canvasContext.fillText(scorePlayer, 100, 100);
+            canvasContext.fillText('Press ESC to reset game', 100, 550);
+            canvasContext.fillText('Press Spacebar to stop the game', canvas.width - 200, 550);
             canvasContext.fillText(scoreCpu, canvas.width - 100, 100);
 
             

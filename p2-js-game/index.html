@@ -204,6 +204,16 @@
             }
         }
 
+        function drawNet()
+        {
+            for(var i=0;i<canvas.height;i+=40)
+            {
+		        colorRect(canvas.width/2-1,i,2,20,'white');
+
+            }
+	
+        }
+
         function draw()
         {
             let scoreCpu = cpuScore.toString();
@@ -249,6 +259,8 @@
             }
 
             drawCircle(ballX, ballY, 10, 'grey');
+
+            drawNet();
 
 
             colorRect(0,paddleOneY,PADDLE_WIDTH,PADDLE_HEIGHT,'white'); // player 1(left)

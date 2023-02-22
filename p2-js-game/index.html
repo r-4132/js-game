@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Project 2 Game</title>
 </head>
 <body>
     <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
     <script>
         let canvas;
         let canvasContext;
@@ -58,7 +60,7 @@
 
         }
 
-        function startGame(evt)
+        function startGame(evt) // start
         {
             if(startGameScreen)
             {
@@ -67,7 +69,7 @@
 
         }
 
-        function resetGame(evt)
+        function resetGame(evt) 
         {
             ballReset();
             playerScore = 0;
@@ -77,6 +79,8 @@
         function stopGame()
         {
             startGameScreen = true;
+            resetGame();
+
 
         }
 
@@ -86,6 +90,7 @@
         {
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
+            canvasContext.font = '18px Courier';
 
             let framePerSecond = 30;
             canvas.addEventListener('mousedown', mouseClick);
@@ -123,8 +128,6 @@
             
             if(cpuScore >= winScore || playerScore >= winScore )
             {
-                // cpuScore = 0;
-                // playerScore = 0;
                 winScreen = true;
             }
             ballSpeedX = -ballSpeedX;
@@ -230,28 +233,39 @@
 
 
             if(winScreen)
-            {canvasContext.fillStyle = 'white';
+            {
+                canvasContext.fillStyle = 'white';
 
                 if(cpuScore >= winScore) 
                 {
-			        canvasContext.fillText("CPU Won", 350, 200);
-                    canvasContext.fillText('click to continue', 350, 500);
+			        canvasContext.fillText("You failed humanity", 296, 200);
+                    canvasContext.fillText('click to continue', 300, 500);
 
 
                 }
 
                 else if(playerScore >= winScore )
                 {
-        			canvasContext.fillText("You Won", 350, 200);
-                    canvasContext.fillText('click to continue', 350, 500);
+        			canvasContext.fillText("You saved humanity", 299, 200);
+                    canvasContext.fillText('click to continue', 300, 500);
 
 
                 }
 
                 else if(playerScore == 0 && cpuScore == 0)
                 {
-        			canvasContext.fillText("Start Game", 350, 200);
+                    let txt = '                    GAME OF PONG\n\n\n\n\n\n\n\n\n\nDrag the mouse to control the left paddle and \ntry to win against the AI before they take over the world!\n\nPress ESC to reset game\nPress Spacebar to stop the game';
+                    let array = txt.split('\n');
+            
+                    
+                    let lineH = 15;
+                    
 
+                    for (var i = 0; i < array.length; i++)
+                    {
+                        canvasContext.fillText(array[i], 100, 150 + (i*lineH));
+                    }
+                    
                 }
                 
 
@@ -267,8 +281,7 @@
             colorRect(canvas.width - PADDLE_WIDTH,paddleTwoY,PADDLE_WIDTH,PADDLE_HEIGHT,'white'); // computer (right)
 
             canvasContext.fillText(scorePlayer, 100, 100);
-            canvasContext.fillText('Press ESC to reset game', 100, 550);
-            canvasContext.fillText('Press Spacebar to stop the game', canvas.width - 200, 550);
+
             canvasContext.fillText(scoreCpu, canvas.width - 100, 100);
 
             

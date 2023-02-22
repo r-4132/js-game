@@ -26,7 +26,8 @@
         let playerScore = 0;
         let cpuScore = 0;
 
-        let winScore = 4;
+        let winScore = 3;
+        let winScreen = false; 
 
 
         function calcMousePos(evt) // function that will execute everytime the mouse moves
@@ -41,6 +42,20 @@
             };
         }
 
+        function mouseClick(evt)
+        {
+            if(winScreen)
+            {
+                playerScore = 0;
+                cpuScore = 0;
+                winScreen = false;
+            }
+            
+
+        }
+
+    
+
         window.onload = function()
         {
             canvas = document.getElementById('gameCanvas');
@@ -54,6 +69,9 @@
                 draw();
             }, 1000/framePerSecond);
 
+            canvas.addEventListener('mousedown', mouseClick);
+
+
             canvas.addEventListener('mousemove', function(evt) // will make the paddle move 
             {
                 let mousePos = calcMousePos(evt); // function evt will pass calcMousePos and will get the y value and contain it in paddleOneY
@@ -66,12 +84,14 @@
         {
             if(cpuScore >= winScore || playerScore >= winScore )
             {
-                cpuScore = 0;
-                playerScore = 0;
+                // cpuScore = 0;
+                // playerScore = 0;
+                winScreen = true;
             }
             ballSpeedX = -ballSpeedX;
             ballX = canvas.width/2
             ballY = canvas.height/2
+            
         }
 
         function cpuMove() //movement for cpu player
@@ -92,6 +112,10 @@
 
         function move()
         {
+            if(winScreen)
+            {
+                return;
+            }
             cpuMove();
             ballX += ballSpeedX; //makign the ball move
             ballY += ballSpeedY;
@@ -145,6 +169,30 @@
             let scorePlayer = playerScore.toString();
 
             colorRect(0,0,canvas.width,canvas.height,'black');
+
+            if(winScreen)
+            {canvasContext.fillStyle = 'white';
+
+                if(cpuScore >= winScore) 
+                {
+			        canvasContext.fillText("CPU Won", 350, 200);
+
+
+                }
+
+                else if(playerScore >= winScore )
+                {
+        			canvasContext.fillText("You Won", 350, 200);
+
+
+                }
+
+                
+                canvasContext.fillText('click to continue', 350, 500);
+
+                return;
+            }
+
             drawCircle(ballX, ballY, 10, 'grey');
 
 

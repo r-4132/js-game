@@ -8,7 +8,7 @@
     <title>Project 2 Game</title>
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <canvas id="gameCanvas" ></canvas>
     
     <script>
         let canvas;
@@ -90,7 +90,10 @@
         {
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
-            canvasContext.font = '18px Courier';
+            canvasContext.font = '18px Courier'
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
             let framePerSecond = 30;
             canvas.addEventListener('mousedown', mouseClick);
@@ -211,7 +214,7 @@
         {
             for(var i=0;i<canvas.height;i+=40)
             {
-		        colorRect(canvas.width/2-1,i,2,20,'white');
+		        colorRect(canvas.width/2,i,2,20,'white'); //the is divided by 2 to center the net. [i] is the the +=40 the space between the line. // 2 is the thickness. 20 is the height of each line
 
             }
 	
@@ -252,18 +255,20 @@
 
                 }
 
-                else if(playerScore == 0 && cpuScore == 0)
+                else if(playerScore == 0 && cpuScore == 0) 
                 {
+
+                    //I wanted to add line break but html canvas doesn't have that feature. 
                     let txt = '                    GAME OF PONG\n\n\n\n\n\n\n\n\n\nDrag the mouse to control the left paddle and \ntry to win against the AI before they take over the world!\n\nPress ESC to reset game\nPress Spacebar to stop the game';
-                    let array = txt.split('\n');
+                    let array = txt.split('\n'); // convert string to array and separate by /n 
             
                     
-                    let lineH = 15;
+                    let lineH = 15; // line height 
                     
 
-                    for (var i = 0; i < array.length; i++)
+                    for (var i = 0; i < array.length; i++) // iterated each array in order to print on the screen
                     {
-                        canvasContext.fillText(array[i], 100, 150 + (i*lineH));
+                        canvasContext.fillText(array[i], 100, 150 + (i*lineH)); //  i*lineH is the most important because it will seperate the arrays vertically
                     }
                     
                 }

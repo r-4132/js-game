@@ -28,8 +28,8 @@ let canvas;
             canvasContext = canvas.getContext('2d');
             canvasContext.font = '18px Courier'
 
-            // canvasContext.canvas.width = window.innerWidth;
-            // canvasContext.canvas.height = window.innerHeight;
+            canvasContext.canvas.width = window.innerWidth;
+            canvasContext.canvas.height = window.innerHeight;
 
             let framePerSecond = 30;
             canvas.addEventListener('mousedown', mouseClick);
@@ -39,7 +39,7 @@ let canvas;
                 draw();
             }, 1000/framePerSecond);
 
-            canvas.addEventListener('pointerdown', startGame);
+            canvas.addEventListener('mousedown', startGame);
             window.addEventListener('keydown', e => // this will restart the game
             {
 

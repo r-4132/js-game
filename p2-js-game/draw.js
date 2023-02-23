@@ -45,7 +45,7 @@ function draw() {
         {
 
             //I wanted to add line break but html canvas doesn't have that feature. 
-            let txt = '                    GAME OF PONG\n\n\n\n\n\n\n\n\n\nDrag the mouse to control the left paddle and \ntry to win against the AI before they take over the world!\n\nPress ESC to reset game\nPress Spacebar to stop the game';
+            let txt = '                                                  GAME OF PONG\n\n\n\n\n\n\n\n\n\nDrag the mouse to control the left paddle and \ntry to win against the AI before they take over the world!\n\nPress ESC to reset game\nPress Spacebar to stop the game';
             let array = txt.split('\n'); // convert string to array and separate by /n 
 
 
@@ -54,7 +54,7 @@ function draw() {
 
             for (var i = 0; i < array.length; i++) // iterated each array in order to print on the screen
             {
-                canvasContext.fillText(array[i], 100, 150 + (i * lineH)); //  i*lineH is the most important because it will seperate the arrays vertically
+                canvasContext.fillText(array[i], 500, 200 + (i * lineH)); //  i*lineH is the most important because it will seperate the arrays vertically
             }
 
         }

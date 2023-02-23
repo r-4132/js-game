@@ -6,23 +6,23 @@
     overflow: hidden;
 }
 
-#canvas
-{
-    width: 800px;
-    height: 600px;
 
-}
-
-/* @media screen and (max-width: 720px)
+@media screen and (max-width: 720px)
 {
+    #gameCanvas
+    {
+        
+        width: 600;
+    }
 
 }
 
 @media screen and (max-width: 480px)
 {
-    #canvas
+    #gameCanvas
     {
-        width: 300px;
+        
+        width: 300;
     }
-} */
+}
 

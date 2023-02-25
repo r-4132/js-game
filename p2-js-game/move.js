@@ -31,12 +31,14 @@ function startGame(evt) // start
 
 function resetGame(evt) 
 {
+    
     ballReset();
     playerScore = 0;
     cpuScore = 0;
 }
 
-function stopGame() {
+function stopGame() 
+{
     startGameScreen = true;
     resetGame();
 
@@ -100,7 +102,7 @@ function move()
 
     }
 
-    if (ballX > canvas.width) // collision detection the paddleTwo(CPU/right paddle)
+    if (ballX > canvas.width) // collision detection for the paddleTwo(CPU/right paddle)
     {
         if (ballY > paddleTwoY && ballY < paddleTwoY + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;

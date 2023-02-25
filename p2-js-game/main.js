@@ -4,7 +4,7 @@ let canvasContext;
 let ballX = 50;
 let ballY = 50; //size of the ball
 
-let ballSpeedX = 15;
+let ballSpeedX = 30;
 let ballSpeedY = 4;
 
 let paddleOneY = 250;

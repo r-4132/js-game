@@ -33,8 +33,8 @@ function draw()
         if (cpuScore >= winScore) 
         {
             canvasContext.font = '18px Courier'
-            canvasContext.fillText("You failed humanity", 450, 200);
-            canvasContext.fillText('click to continue', 450, 500);
+            canvasContext.fillText("You failed humanity", 550, 200);
+            canvasContext.fillText('click to continue', 550, 500);
             
 
 
@@ -43,8 +43,8 @@ function draw()
         else if (playerScore >= winScore) 
         {
             canvasContext.font = '18px Courier'
-            canvasContext.fillText("You saved humanity", 450, 200);
-            canvasContext.fillText('click to continue', 450, 500);
+            canvasContext.fillText("You saved humanity", 550, 200);
+            canvasContext.fillText('click to continue', 550, 500);
             
 
 

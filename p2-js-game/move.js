@@ -2,8 +2,8 @@ function calcMousePos(evt) // function that will execute everytime the mouse mov
 {
     let rect = canvas.getBoundingClientRect(); // returns the size of the canvas 
     let root = document.documentElement;
-    var mouseX = evt.clientX - rect.left - root.scrollLeft; // this will calculate where the playable area is in the web page.
-    var mouseY = evt.clientY - rect.top - root.scrollTop;
+    let mouseX = evt.clientX - rect.left - root.scrollLeft; // this will calculate where the playable area is in the web page.
+    let mouseY = evt.clientY - rect.top - root.scrollTop;
     return {
         x: mouseX,
         y: mouseY
@@ -79,11 +79,12 @@ function move()
 {
 
 
-    if (winScreen) {
+    if (winScreen) 
+    {
         return;
     }
     cpuMove();
-    ballX += ballSpeedX; //makign the ball move
+    ballX += ballSpeedX; //making the ball move
     ballY += ballSpeedY;
 
     if (ballX < 0) // collision detection for the paddle 
@@ -96,7 +97,7 @@ function move()
         }
         else  // else not, reset the ball in the middle and add score to cpu
         {
-            cpuScore++;
+            cpuScore++; // must add score first befer reset ball
             ballReset();
         }
 
@@ -116,12 +117,12 @@ function move()
     }
 
 
-    if (ballY < 0) // maintain speed after bouncing off vertically
+    if (ballY < 0) // prevent the ball from going beyond the top of the screen
     {
         ballSpeedY = -ballSpeedY;
     }
 
-    if (ballY > canvas.height) //bounces off  y-axis
+    if (ballY > canvas.height) //bounces off  y-axis prevent the ball from going beyond of the bottom part of the screen
     {
         ballSpeedY = -ballSpeedY;
     }

@@ -32,7 +32,7 @@ window.onload = function ()
 
     let framePerSecond = 30;
     canvas.addEventListener('mousedown', mouseClick);
-    setInterval(function () //for every second it will draw() the and move() it, but also make sure that it will bounce off the corners
+    setInterval(function () //for every second it will draw() the ball and move() it, but also make sure that it will bounce off the corners
     {
         move();
         draw();
@@ -59,4 +59,16 @@ window.onload = function ()
         paddleOneY = mousePos.y - (PADDLE_HEIGHT / 2);
     });
 
+}
+
+function calcMousePos(evt) // function that will execute everytime the mouse moves
+{
+    let rect = canvas.getBoundingClientRect(); // returns the size of the canvas 
+    let root = document.documentElement;
+    let mouseX = evt.clientX - rect.left - root.scrollLeft; // this will calculate where the playable area is in the web page.
+    let mouseY = evt.clientY - rect.top - root.scrollTop;
+    return {
+        x: mouseX,
+        y: mouseY
+    };
 }

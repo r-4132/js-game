@@ -15,6 +15,7 @@ function startGame(evt) // start
     if (startGameScreen) 
     {
         startGameScreen = false;
+        ballColor = 0;
     }
 
 }
@@ -84,11 +85,14 @@ function move()
             ballSpeedX = -ballSpeedX // bounce off the paddle 
             let deltaY = ballY - (paddleOneY + PADDLE_HEIGHT / 2);// the speed of the ball will now depend on the angle and distance of the center of the paddle.
             ballSpeedY = deltaY * 0.35;
+            
+            
         }
         else  // else not, reset the ball in the middle and add score to cpu
         {
             cpuScore++; // must add score first befer reset ball
             ballReset();
+            ballColor = 1;
         }
 
     }
@@ -99,10 +103,12 @@ function move()
             ballSpeedX = -ballSpeedX;
             let deltaY = ballY - (paddleTwoY + PADDLE_HEIGHT / 2);
             ballSpeedY = deltaY * 0.35;
+            
         }
         else {
             playerScore++;
             ballReset();
+            ballColor = 2;
         }
     }
 

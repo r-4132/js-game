@@ -6,3 +6,14 @@
     overflow: hidden; /*Hides Scroll bar*/
 }
 
+canvas
+{
+    background-color: green;
+    
+}
+
+canvas paddlepaddleOneY
+{
+    background-color: black;
+
+}

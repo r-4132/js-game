@@ -22,14 +22,13 @@ let startGameScreen = true;
 
 let resetScreen = false
 
+let ballColor = false;
+
 window.onload = function () 
 {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
-    // canvasContext.font = 'bold 18px Courier';
-
     
-
     let framePerSecond = 30;
     canvas.addEventListener('mousedown', mouseClick);
     setInterval(function () //for every second it will draw() the ball and move() it, but also make sure that it will bounce off the corners

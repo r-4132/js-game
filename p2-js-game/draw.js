@@ -16,7 +16,7 @@ function draw()
     let scoreCpu = cpuScore.toString();
     let scorePlayer = playerScore.toString();
 
-    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    // colorRect(0, 0, canvas.width, canvas.height, 'black');
 
     if (startGameScreen) 
     {
@@ -29,6 +29,7 @@ function draw()
     if (winScreen) 
     {
         canvasContext.fillStyle = 'white';
+        
 
         if (cpuScore >= winScore) 
         {
@@ -70,12 +71,18 @@ function draw()
             }
 
         }
+        startScreenSound("lost.wav");
 
 
         return;
     }
 
-    drawCircle(ballX, ballY, 10, 'grey');
+    if(ballColor == 0) drawCircle(ballX, ballY, 10, 'white');
+
+    else if (ballColor == 1) drawCircle(ballX, ballY, 10, 'red');
+
+    else if (ballColor == 2) drawCircle(ballX, ballY, 10, 'yellow');
+    
 
     drawNet();
 

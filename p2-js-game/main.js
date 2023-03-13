@@ -1,6 +1,7 @@
 let canvas;
 let canvasContext;
 
+
 let ballX = 50;
 let ballY = 50; //size of the ball
 
@@ -21,9 +22,6 @@ let winScreen = false;
 let startGameScreen = true;
 
 let resetScreen = false
-
-// let ballColor = false;
-
 
 
 window.onload = function () 

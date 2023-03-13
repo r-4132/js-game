@@ -85,7 +85,7 @@ function move()
             ballSpeedX = -ballSpeedX // bounce off the paddle 
             let deltaY = ballY - (paddleOneY + PADDLE_HEIGHT / 2);// the speed of the ball will now depend on the angle and distance of the center of the paddle.
             ballSpeedY = deltaY * 0.35;
-            hitSound();
+            sound.hit();
             
             
             
@@ -95,7 +95,7 @@ function move()
             cpuScore++; // must add score first befer reset ball
             ballReset();
             ballColor = 1;//this where the ball color change is initiated from draw.js
-            score();
+            sound.score();
         }
 
     }
@@ -106,7 +106,7 @@ function move()
             ballSpeedX = -ballSpeedX;
             let deltaY = ballY - (paddleTwoY + PADDLE_HEIGHT / 2);
             ballSpeedY = deltaY * 0.35;
-            hitSound();
+            sound.hit();
             
 
             
@@ -115,7 +115,7 @@ function move()
             playerScore++;
             ballReset();
             ballColor = 2;//this where the ball color change is initiated from draw.js
-            score();
+            sound.score();
         }
     }
 

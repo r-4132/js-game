@@ -71,7 +71,7 @@ function draw()
         return;
     }
 
-    if(ballColor == 0) drawCircle(ballX, ballY, 10, 'white'); // added color effect to keep track who scored last
+    if(ballColor == 0) drawCircle(ballX, ballY, 10, 'white'); // ball color is white if no one has scored yet.
 
     else if (ballColor == 1) drawCircle(ballX, ballY, 10, 'red'); //ball is red if the cpu or right paddle scored last.
 

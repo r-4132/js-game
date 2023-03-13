@@ -53,13 +53,13 @@ function ballReset() // this will make the ball reset in the middle whenever a p
 function cpuMove() //movement for cpu player
 {
     let paddleTwoYMid = paddleTwoY + (PADDLE_HEIGHT / 2) // make the center part of the paddle the start point
-    if (paddleTwoYMid < ballY - 30) // the paddles stops moving if the direction of the ball is 30 pixels above the center
+    if (paddleTwoYMid < ballY - 30) // the paddles stops moving if the direction of the ball is 30 pixels above the center point. 
     {
-        paddleTwoY += 6;
+        paddleTwoY += 6; // the paddle will only move every 6 pixels up
     }
 
     else if (paddleTwoYMid > ballY + 30) {
-        paddleTwoY -= 6;
+        paddleTwoY -= 6; // the paddle will only move every 6 pixels down
     }
 
 
@@ -83,7 +83,7 @@ function move()
         if (ballY > paddleOneY && ballY < paddleOneY + PADDLE_HEIGHT) // if the ball hit the paddle for paddleOne(player/left paddle) 
         {
             ballSpeedX = -ballSpeedX // bounce off the paddle 
-            let deltaY = ballY - (paddleOneY + PADDLE_HEIGHT / 2);// the speed of the ball will now depend on the angle and distance of the center of the paddle.
+            let deltaY = ballY - (paddleOneY + PADDLE_HEIGHT / 2);// the speed and angle of the ball wil depend where it hits the paddle. If the player stops moving the balls consistently hit the center, the cpu paddle will also not move because the direction of the ball is unchanging. The cpu paddle will only move if the ball move. 
             ballSpeedY = deltaY * 0.35;
             sound.hit();
             
@@ -103,7 +103,7 @@ function move()
     if (ballX > canvas.width) // collision detection for the paddleTwo(CPU/right paddle)
     {
         if (ballY > paddleTwoY && ballY < paddleTwoY + PADDLE_HEIGHT) {
-            ballSpeedX = -ballSpeedX;
+            ballSpeedX = -ballSpeedX; 
             let deltaY = ballY - (paddleTwoY + PADDLE_HEIGHT / 2);
             ballSpeedY = deltaY * 0.35;
             sound.hit();

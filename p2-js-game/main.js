@@ -61,7 +61,7 @@ window.onload = function ()
 
 function calculateMouseDirection(evt) // function that will execute everytime the mouse moves
 {
-    let rect = canvas.getBoundingClientRect(); // returns the size of the canvas 
+    let rect = canvas.getBoundingClientRect(); // returns the size of the canvas. rect means rectangle
     let root = document.documentElement;
     let mouseX = evt.clientX - rect.left - root.scrollLeft; // this will calculate where the playable area is in the web page.
     let mouseY = evt.clientY - rect.top - root.scrollTop;

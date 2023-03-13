@@ -1,5 +1,5 @@
 
-const sound = 
+const sound = // I believe, I forgot to implement objects. Unfortunately, I don't have time to re-implement object method to every global variable I made for this game.
 {
     hit: function()
     {

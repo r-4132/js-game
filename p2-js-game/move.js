@@ -15,7 +15,7 @@ function startGame(evt) // start
     if (startGameScreen) 
     {
         startGameScreen = false;
-        ballColor = 0;
+        ballColor = 0; // reset the ball to white 
     }
 
 }

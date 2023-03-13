@@ -24,32 +24,32 @@ let resetScreen = false
 
 let ballColor = false;
 
+
+
 window.onload = function () 
 {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
     
     let framePerSecond = 30;
+    
     canvas.addEventListener('mousedown', mouseClick);
     setInterval(function () //for every second it will draw() the ball and move() it, but also make sure that it will bounce off the corners
     {
         move();
         draw();
     }, 1000 / framePerSecond);
+    
 
     canvas.addEventListener('mousedown', startGame);
     window.addEventListener('keydown', e => // this will restart the game
     {
 
 
-        if (e.key === 'Escape') 
-        {
-            resetGame();
-        }
-        else if (e.key === ' ') 
-        {
-            stopGame();
-        }
+        if (e.key === 'Escape') resetGame();
+        
+        else if (e.key === ' ') stopGame();
+        
     })
 
     canvas.addEventListener('mousemove', function (evt) // will make the paddle move 
@@ -57,6 +57,7 @@ window.onload = function ()
         let mousePos = calcMousePos(evt); // function evt will pass calcMousePos and will get the y value and contain it in paddleOneY
         paddleOneY = mousePos.y - (PADDLE_HEIGHT / 2);
     });
+    
 
 }
 

@@ -21,10 +21,9 @@ function draw()
     if (startGameScreen) 
     {
         winScreen = true;
-
+        
     }
-
-
+    
 
     if (winScreen) 
     {
@@ -36,8 +35,6 @@ function draw()
             canvasContext.font = '18px Courier'
             canvasContext.fillText("You failed humanity", 550, 200);
             canvasContext.fillText('click to continue', 550, 500);
-            
-
 
         }
 
@@ -47,7 +44,6 @@ function draw()
             canvasContext.fillText("You saved humanity", 550, 200);
             canvasContext.fillText('click to continue', 550, 500);
             
-
 
         }
 
@@ -71,9 +67,7 @@ function draw()
             }
 
         }
-        startScreenSound("lost.wav");
-
-
+    
         return;
     }
 

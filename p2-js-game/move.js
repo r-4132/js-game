@@ -32,8 +32,6 @@ function stopGame()
 {
     startGameScreen = true;
     resetGame();
-
-
 }
 
 
@@ -44,6 +42,7 @@ function ballReset() // this will make the ball reset in the middle whenever a p
 
     if (cpuScore >= winScore || playerScore >= winScore) {
         winScreen = true;
+        
     }
     ballSpeedX = -ballSpeedX;
     ballX = canvas.width / 2
@@ -80,11 +79,14 @@ function move()
 
     if (ballX < 0) // collision detection for the paddle 
     {
+        
         if (ballY > paddleOneY && ballY < paddleOneY + PADDLE_HEIGHT) // if the ball hit the paddle for paddleOne(player/left paddle) 
         {
             ballSpeedX = -ballSpeedX // bounce off the paddle 
             let deltaY = ballY - (paddleOneY + PADDLE_HEIGHT / 2);// the speed of the ball will now depend on the angle and distance of the center of the paddle.
             ballSpeedY = deltaY * 0.35;
+            hitSound();
+            
             
             
         }
@@ -93,6 +95,7 @@ function move()
             cpuScore++; // must add score first befer reset ball
             ballReset();
             ballColor = 1;
+            score();
         }
 
     }
@@ -103,12 +106,16 @@ function move()
             ballSpeedX = -ballSpeedX;
             let deltaY = ballY - (paddleTwoY + PADDLE_HEIGHT / 2);
             ballSpeedY = deltaY * 0.35;
+            hitSound();
+            
+
             
         }
         else {
             playerScore++;
             ballReset();
             ballColor = 2;
+            score();
         }
     }
 

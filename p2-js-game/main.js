@@ -22,7 +22,7 @@ let startGameScreen = true;
 
 let resetScreen = false
 
-let ballColor = false;
+// let ballColor = false;
 
 
 

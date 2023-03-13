@@ -71,11 +71,11 @@ function draw()
         return;
     }
 
-    if(ballColor == 0) drawCircle(ballX, ballY, 10, 'white');
+    if(ballColor == 0) drawCircle(ballX, ballY, 10, 'white'); // added color effect to keep track who scored last
 
-    else if (ballColor == 1) drawCircle(ballX, ballY, 10, 'red');
+    else if (ballColor == 1) drawCircle(ballX, ballY, 10, 'red'); //ball is red if the cpu or right paddle scored last.
 
-    else if (ballColor == 2) drawCircle(ballX, ballY, 10, 'yellow');
+    else if (ballColor == 2) drawCircle(ballX, ballY, 10, 'yellow'); //ball is yellow if left player scored last.
     
 
     drawNet();

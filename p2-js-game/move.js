@@ -94,7 +94,7 @@ function move()
         {
             cpuScore++; // must add score first befer reset ball
             ballReset();
-            ballColor = 1;
+            ballColor = 1;//this where the ball color change is initiated from draw.js
             score();
         }
 
@@ -114,7 +114,7 @@ function move()
         else {
             playerScore++;
             ballReset();
-            ballColor = 2;
+            ballColor = 2;//this where the ball color change is initiated from draw.js
             score();
         }
     }

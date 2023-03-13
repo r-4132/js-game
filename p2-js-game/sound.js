@@ -14,17 +14,3 @@ const score = () =>
     
 }
 
-const winSound = () => 
-{
-    let win = new Audio('assets/win.wav');
-    win.loop = false;
-    win.play();
-
-}
-
-const lostSound = () => 
-{
-    let lost = new Audio('assets/lost.wav');
-    lost.loop = false;
-    lost.play();
-}

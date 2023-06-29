@@ -7,7 +7,7 @@
 &nbsp;
 ## Technology
 
-- <img src = "https://www.flaticon.com/free-icon/js_5968292?term=javascript&page=1&position=4&origin=search" width="200">
+- <img src = "https://logodownload.org/wp-content/uploads/2022/04/javascript-logo-4.png" width="200">
 
 ---
 &nbsp;
